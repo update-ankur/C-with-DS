@@ -1,4 +1,5 @@
 #include<iostream>
+//we can also use <bits/stdc++.h> when we are using more header file
 using namespace std;
 
 
@@ -25,9 +26,10 @@ this-> width=width;
 
 int main(){
 
-rectangle a(5,6);
-
-cout<<a.area()<<endl;
+rectangle a(5,6);// rectangle class is called 
+//a object is made out of rectangle class 
+  
+cout<<a.area()<<endl; //calling class function for object a 
 
   return 0;
 }
