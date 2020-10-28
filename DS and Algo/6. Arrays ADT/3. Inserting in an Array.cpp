@@ -28,7 +28,8 @@ void insert(struct Array *a,int p,int v){
         a->arr[i+1]=a->arr[i];
     }
     a->arr[p]=v;
-
+    //now length will also upgrade
+    a->length++;
 }
 
 
