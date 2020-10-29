@@ -75,7 +75,7 @@ void Get(struct Array a,int index){
 }
 
 
-int Set(struct Array *a,int index,int value){
+void Set(struct Array *a,int index,int value){
     a->arr[index]=value;
 }
 
