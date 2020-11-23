@@ -34,6 +34,9 @@ public:
         size++;
     }
     T pop(){
+        if(isempty()){    // we can even use head==NULL
+            return 0;
+        }
         int x=Head->data;
         Node<T> *p=Head->next;
         delete Head;
@@ -42,6 +45,9 @@ public:
         return x;
     }
     T Top(){
+        if(isempty()){    // we can even use head==NULL
+            return 0;
+        }
         return Head->data;
     }
 };
