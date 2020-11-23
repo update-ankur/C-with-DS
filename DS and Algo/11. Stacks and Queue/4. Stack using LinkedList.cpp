@@ -32,6 +32,9 @@ public:
         size++;
     }
     int pop(){
+        if(isempty()){    // we can even use head==NULL
+            return 0;
+        }
         int x=Head->data;
         Node *p=Head->next;
         delete Head;
@@ -40,6 +43,9 @@ public:
         return x;
     }
     int Top(){
+        if(isempty()){    // we can even use head==NULL
+            return 0;
+        }
         return Head->data;
     }
 };
