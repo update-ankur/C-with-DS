@@ -41,8 +41,7 @@ public:
         size++;
     }
     int front(){
-        if(head==NULL){
-            cout<< "Stack is Empty"<<endl;
+        if(head==NULL){ //we can even use isempty() fn;
             return 0;
         }
         int value=head->data;
@@ -50,8 +49,7 @@ public:
 
     }
     T dequeue(){
-        if(head==NULL){
-            cout<< "Stack is Empty"<<endl;
+         if(head==NULL){ //we can even use isempty() fn;
             return 0;
         }
         T value=head->data;
