@@ -3,8 +3,8 @@
 using namespace std;
 
 int main(){
-    int n,v;
-    cin>>n>>v;
+    int n,e;
+    cin>>n>>e;
     
     int* *edges=new int*[n];
     for(int i=0;i<n;i++){
@@ -14,7 +14,7 @@ int main(){
         }
     }
     
-    for (int i=0;i<n;i++) { // n edges
+    for (int i=0;i<e;i++) { // n edges
         int f,s;
         cin>>f>>s;
         edges[f][s]=1;
