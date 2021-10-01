@@ -1,151 +1,73 @@
-/*     ***BUBBLE SORT***     */
+#include<bits/stdc++.h> //using master header file 
 
-
-#include <stdio.h>
-void swap(int *xp, int *yp)
-{
-    int temp = *xp;
-    *xp = *yp;
-    *yp = temp;
-}
-void bubble(int arr[], int i, int n);
-void bubbleSort(int arr[], int n)
-{
-   int i, j;
-   for (i = 0; i < n-1; i++)      
-        bubble(arr, i, n);
-}
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-int main()
-{
-    int arr[1000],n,T,i;
-    scanf("%d",&T);
-    while(T--){
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
-      scanf("%d",&arr[i]);     
-    bubbleSort(arr, n);
-    printArray(arr, n);
-    }
-    return 0;;
-}
-void bubble(int arr[], int i, int n)
-{
-    int j;
-    for(j=0;j<n-i-1;j++)
-    	if(arr[j]>arr[j+1])
-    		swap(&arr[j],&arr[j+1]);
-}
-
-
-
-
-
-
-/*     ***INSERTION SORT***     */
-
-
-#include <stdio.h>
-#include <math.h>
-void insert(int arr[], int i);
-void insertionSort(int arr[], int n)
-{
-   int i;
-   for (i = 1; i <n; i++)
-      insert(arr, i);
-}
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-int main()
-{
-    int arr[1000],n,T,i;
-    scanf("%d",&T);
-    while(T--){
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
-      scanf("%d",&arr[i]);
-    insertionSort(arr, n);
-    printArray(arr, n);
-    }
-    return 0;
-}
-void insert(int arr[], int i)
-{
-    int key=arr[i];
-    int j=i-1;
-    while(j>=0 && arr[j]>key)
-    {
-        arr[j+1]=arr[j];
-        j--;
-    }
-    arr[j+1]=key;
-}
-
-
-
-
-
-
-
-/*     ***QUICK SORT***     */
-
-
-#include <stdio.h>
-#include <bits/stdc++.h>
 using namespace std;
-int partition (int arr[], int low, int high);
-void quickSort(int arr[], int low, int high)
-{
-    if (low < high)
-    {
-        int pi = partition(arr, low, high);
-        quickSort(arr, low, pi - 1);
-        quickSort(arr, pi + 1, high);
-    }
-}
-void printArray(int arr[], int size)
-{
-    int i;
-    for (i=0; i < size; i++)
-        printf("%d ", arr[i]);
-    printf("\n");
-}
-int main()
-{
-    int arr[1000],n,T,i;
-    scanf("%d",&T);
-    while(T--){
-    scanf("%d",&n);
-    for(i=0;i<n;i++)
-      scanf("%d",&arr[i]);
-    quickSort(arr, 0, n-1);
-    printArray(arr, n);
-    }
-    return 0;
-}
-int partition (int arr[], int low, int high)
-{   
-    int i=low-1;
-    int pivot=arr[high];
-    for(int j=low;j<=high-1;j++)
-    {
-        if(arr[j]<pivot)
-        {
+
+int a[100]; // globally intialising value of array
+
+
+//merging two subarrays
+void merge(int lf1, int rt1, int lf2, int rt2) {
+    int i = lf1 , j = lf2;
+    int n = rt1 - lf1 + 1 , m = rt2 - lf2 + 1;
+    int kk = 0;
+
+    int arr3[m + n];
+
+    while (i < rt1 + 1 && j < rt2 + 1) {
+        if (a[i] < a[j]) {
+            arr3[kk] = a[i];
+            kk++;
             i++;
-            swap(arr[i],arr[j]);
+        }
+        else {
+            arr3[kk] = a[j];
+            kk++;
+            j++;
         }
     }
-    swap(arr[i+1],arr[high]);
-    return (i+1);
+
+    while (i < rt1 + 1) {
+        arr3[kk] = a[i];
+        kk++; i++;
+    }
+
+    while (j < rt2 + 1) {
+        arr3[kk] = a[j];
+        kk++; j++;
+    }
+
+    for (int i = lf1; i <= rt2; i++) {
+        a[i] = arr3[i - lf1];
+    }
+
+}
+
+//left index and right index of subarray to be sorted
+void mergesort(int left, int right) {
+    if (left >= right) {
+        return ;
+    }
+    int mid = (left + right) / 2;
+    
+    //dort first and second half
+    mergesort(left, mid);
+    mergesort(mid + 1, right);
+    merge(left, mid, mid + 1, right);
+}
+
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+    }
+    
+    
+    mergesort(0, n - 1);
+    
+    
+    for (int i = 0; i < n; i++) {
+        cout << a[i] << " ";
+    }
 }
