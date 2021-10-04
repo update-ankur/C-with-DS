@@ -1,0 +1,87 @@
+#include <stdio.h> 
+
+// Linear Search
+  
+int search(int arr[], int n, int x) 
+{ 
+    int i; 
+    for (i = 0; i < n; i++) 
+        if (arr[i] == x) 
+            return i; 
+    return -1; 
+} 
+
+// Binary Search
+
+int binarySearch(int arr[], int l, int r, int x) 
+{ 
+    if (r >= l) { 
+        int mid = l + (r - l) / 2; 
+  
+        // If the element is present at the middle 
+        if (arr[mid] == x) 
+            return mid; 
+  
+        // If element is smaller than mid, then it can be present in left subarray 
+        if (arr[mid] > x) 
+            return binarySearch(arr, l, mid - 1, x); 
+  
+        // Else the element can be in right subarray 
+        return binarySearch(arr, mid + 1, r, x); 
+    } 
+  
+    // If Not Found
+    return -1; 
+} 
+  
+// Fibonacci Search
+
+int fibMonaccianSearch(int arr[], int x, int n) 
+{ 
+    // Initialize fibonacci numbers 
+    int fibMMm2 = 0;   // (m-2)'th Fibonacci No. 
+    int fibMMm1 = 1;   // (m-1)'th Fibonacci No. 
+    int fibM = fibMMm2 + fibMMm1;  // m'th Fibonacci 
+  
+    // fibM is going to store the smallest Fibonacci 
+    while (fibM < n) 
+    { 
+        fibMMm2 = fibMMm1; 
+        fibMMm1 = fibM; 
+        fibM  = fibMMm2 + fibMMm1; 
+    } 
+ 
+    int offset = -1; 
+  
+    
+    // we compare arr[fibMm2] with x. When fibM becomes 1, fibMm2 becomes 0 
+    while (fibM > 1) 
+    { 
+        // Check if fibMm2 is a valid location 
+        int i = (x<=y)? offset+fibMMm2 : n-1;
+  
+        //  If x is greater than value at fibMm2, cut the subarray array from offset to i 
+        if (arr[i] < x) 
+        { 
+            fibM  = fibMMm1; 
+            fibMMm1 = fibMMm2; 
+            fibMMm2 = fibM - fibMMm1; 
+            offset = i; 
+        } 
+  
+        // If x is greater than valu+ at fibMm2, cut the subarray after i+1
+        else if (arr[i] > x) 
+        { 
+            fibM  = fibMMm2; 
+            fibMMm1 = fibMMm1 - fibMMm2; 
+            fibMMm2 = fibM - fibMMm1; 
+        } 
+  
+        else return i; 
+    } 
+  
+        if(fibMMm1 && arr[offset+1]==x)return offset+1; 
+  
+    // not found
+    return -1; 
+} 

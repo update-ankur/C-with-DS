@@ -1,0 +1,35 @@
+void Insert(struct Node *p,int index, int value){
+    struct Node *t;
+    if(index<0 || index>Count(p)){
+        return;
+    }
+    
+    t=(struct Node *)malloc(sizeof(struct Node));
+    t->data=value;
+    
+    if(index==0){
+        t->next=first;
+        first=t;
+    }
+    
+    else if(index>0){
+        for(int i=0;i<index-1;i++){
+            p=p->next;
+        }
+        t->next=p->next;
+        p->next=t;
+    }
+}
+
+void InsertLast(struct Node *p,int value){   // to understand better think *p is first pointer
+    struct Node *t=(struct Node *)malloc(sizeof(struct Node));
+    t->data=value;
+    t->next=NULL;
+    if(first==NULL){
+        first=last=t;
+    }
+    else{
+        last->next=t;
+        last=t;
+    }
+}
