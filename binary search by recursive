@@ -1,0 +1,67 @@
+#include <iostream>
+using namespace std;
+
+int sortedArray[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+void printArray(int Array[], int ArraySize)
+{
+    for (int i = 0; i < ArraySize; i++)
+    {
+        cout << Array[i] << endl;
+    }
+}
+
+int searchElement(int l, int h, int key)
+{
+    cout << "checked" << endl;
+
+    if (l == h)
+    {
+        if (sortedArray[l] == key)
+        {
+            return sortedArray[l];
+        }
+        else
+        {
+            return -1;
+        }
+    }
+    else
+    {
+        int mid;
+        mid = (l + h) / 2;
+
+        if (sortedArray[mid] == key)
+        {
+            return mid;
+        }
+        else if (sortedArray[mid] > key)
+        {
+            return searchElement(l, mid - 1, key);
+        }
+        else
+        {
+            return searchElement(mid + 1, h, key);
+        }
+    }
+}
+
+int main()
+{
+    cout << "Binary Search By Recurssive method (divide and conquer method)" << endl;
+    printArray(sortedArray, 10);
+
+    int key = 4;
+    int foundIndex = searchElement(0, 10, key);
+
+    if (foundIndex == -1)
+    {
+        cout << "Not Found" << foundIndex << endl;
+    }
+    else
+    {
+        cout << "Element Found " << sortedArray[foundIndex] << " at " << foundIndex << endl;
+    };
+
+    return 0;
+}
